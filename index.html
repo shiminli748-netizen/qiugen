@@ -378,21 +378,9 @@
     return ok ? { age, weight, height } : null;
   }
 
-  // 坊间戏式：依身高、体重、年龄虚演根长（纯娱乐，无科学依据）
+  // 计算式：根长 = 0.08 × 身高 - 0.05 × 体重 + 0.02 × 年龄 + 2.34
   function calcRootLength(age, weight, height) {
-    // BMI 影响系数：偏瘦略增，偏胖略减
-    const bmi = weight / Math.pow(height / 100, 2);
-    let bmiFactor = 0;
-    if (bmi < 20) bmiFactor = 0.6;
-    else if (bmi < 25) bmiFactor = 0.2;
-    else if (bmi < 30) bmiFactor = -0.4;
-    else bmiFactor = -1.1;
-
-    // 主式
-    let len = (height * 0.045) + (weight * 0.022) - (age * 0.018) + 4.2 + bmiFactor;
-
-    // 限定于合理娱乐区间
-    len = Math.max(6.5, Math.min(20, len));
+    let len = 0.08 * height - 0.05 * weight + 0.02 * age + 2.34;
     return Math.round(len * 10) / 10;
   }
 
